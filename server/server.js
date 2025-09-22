@@ -15,6 +15,7 @@ const io = socketIo(server, {
 });
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.RAILWAY_STATIC_URL || `http://localhost:${PORT}`;
 
 // Middleware
 app.use(cors());
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
 
 app.get('/qr', async (req, res) => {
   try {
-    const url = `${req.protocol}://${req.get('host')}`;
+    const url = HOST;
     const qrCode = await QRCode.toDataURL(url);
     res.json({ qrCode, url });
   } catch (error) {
@@ -153,7 +154,8 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`🍔 Serveur Burger Quiz démarré sur le port ${PORT}`);
-  console.log(`📱 Interface étudiante: http://localhost:${PORT}`);
+  console.log(`📱 Interface étudiante: ${HOST}`);
+  console.log(`🌐 URL publique: ${HOST}`);
 });
