@@ -318,7 +318,7 @@ document.body.addEventListener('keyup',  function(event){
 
 // Fonctions pour le mode multi-joueurs
 function toggleMultiplayer() {
-	const panel = document.getElementById('multiplayer-panel');
+	const panel = document.getElementById('multiplayer-content');
 	const button = document.getElementById('toggle-multiplayer');
 	
 	if (panel.style.display === 'none') {

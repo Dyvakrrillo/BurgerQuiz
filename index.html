@@ -26,30 +26,6 @@
 		<img id="score-ketchup" src="img/score-00.jpg" /></div>
 	</div>
 	<div id="commandes">R:Reset / F:Fichier / P:Play / H:Help<br />Mayo M:+1 L:-1 / Ketchup K:+1 J:-1<br />&larr;:Précédent / &rarr;:Suivant / Espace:Réponse</div>
-	<div id="multiplayer-section">
-		<button id="toggle-multiplayer" onclick="toggleMultiplayer()">🎮 Mode Multi-joueurs</button>
-		<div id="multiplayer-panel" style="display:none;">
-			<div id="qr-code-container">
-				<img id="qr-code" src="" alt="QR Code" />
-				<p>Scannez pour rejoindre !</p>
-			</div>
-			<div id="players-list">
-				<div class="team-players">
-					<h4>🍯 MAYO</h4>
-					<ul id="mayo-players"></ul>
-				</div>
-				<div class="team-players">
-					<h4>🍅 KETCHUP</h4>
-					<ul id="ketchup-players"></ul>
-				</div>
-			</div>
-			<div id="buzzer-controls">
-				<button id="activate-buzzer" onclick="activateBuzzer()">Activer Buzzer</button>
-				<button id="reset-buzzer" onclick="resetBuzzer()">Reset Buzzer</button>
-			</div>
-			<div id="last-buzz-display"></div>
-		</div>
-	</div>
 	<div id="upload">
 		<input type="file" id="fileInput" />
 	</div>
@@ -75,7 +51,31 @@
 			<button id="show-answer" onclick="showCorrectAnswer()">Révéler la réponse</button>
 		</div>
 	</div>
-</div>	
+</div>
+<div id="multiplayer-panel">
+	<button id="toggle-multiplayer" onclick="toggleMultiplayer()">🎮 Mode Multi-joueurs</button>
+	<div id="multiplayer-content" style="display:none;">
+		<div id="qr-code-container">
+			<img id="qr-code" src="" alt="QR Code" />
+			<p>Scannez pour rejoindre !</p>
+		</div>
+		<div id="players-list">
+			<div class="team-players">
+				<h4>🍯 MAYO</h4>
+				<ul id="mayo-players"></ul>
+			</div>
+			<div class="team-players">
+				<h4>🍅 KETCHUP</h4>
+				<ul id="ketchup-players"></ul>
+			</div>
+		</div>
+		<div id="buzzer-controls">
+			<button id="activate-buzzer" onclick="activateBuzzer()">Activer Buzzer</button>
+			<button id="reset-buzzer" onclick="resetBuzzer()">Reset Buzzer</button>
+		</div>
+		<div id="last-buzz-display"></div>
+	</div>
+</div>
 </div>
 <script src="fonctions.js"></script>
 </body>
