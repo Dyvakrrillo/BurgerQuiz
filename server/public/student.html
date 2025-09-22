@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Quiz - Étudiant</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Écran de connexion -->
+        <div id="login-screen" class="screen active">
+            <div class="container">
+                <div class="logo">
+                    <h1>🍔 BURGER QUIZ</h1>
+                    <p>Rejoignez la partie !</p>
+                </div>
+                
+                <div class="login-form">
+                    <div class="input-group">
+                        <label for="playerName">Votre prénom :</label>
+                        <input type="text" id="playerName" placeholder="Entrez votre prénom" maxlength="20">
+                    </div>
+                    
+                    <div class="team-selection">
+                        <label>Choisissez votre équipe :</label>
+                        <div class="teams">
+                            <button class="team-btn mayo" data-team="mayo">
+                                <span class="team-icon">🍯</span>
+                                <span class="team-name">MAYO</span>
+                            </button>
+                            <button class="team-btn ketchup" data-team="ketchup">
+                                <span class="team-icon">🍅</span>
+                                <span class="team-name">KETCHUP</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button id="joinGame" class="join-btn" disabled>Rejoindre la partie</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran de jeu -->
+        <div id="game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <div class="player-info">
+                        <span id="playerNameDisplay"></span>
+                        <span id="teamDisplay" class="team-badge"></span>
+                    </div>
+                    <div class="connection-status">
+                        <span id="connectionStatus">🟢 Connecté</span>
+                    </div>
+                </div>
+
+                <div class="game-content">
+                    <div class="scores-display">
+                        <div class="score mayo">
+                            <span class="team-name">MAYO</span>
+                            <span id="mayoScore" class="score-value">00</span>
+                        </div>
+                        <div class="score ketchup">
+                            <span class="team-name">KETCHUP</span>
+                            <span id="ketchupScore" class="score-value">00</span>
+                        </div>
+                    </div>
+
+                    <div class="buzzer-section">
+                        <div id="buzzerStatus" class="buzzer-status">
+                            Prêt à buzzer !
+                        </div>
+                        <button id="buzzerBtn" class="buzzer-btn">
+                            <span class="buzzer-text">MIAM</span>
+                            <span class="buzzer-subtitle">Appuyez pour buzzer !</span>
+                        </button>
+                    </div>
+
+                    <div class="game-info">
+                        <div id="currentSlide" class="slide-info">
+                            Diapositive 1
+                        </div>
+                        <div id="lastBuzzer" class="last-buzzer">
+                            <!-- Affichage du dernier buzz -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran de déconnexion -->
+        <div id="disconnected-screen" class="screen">
+            <div class="container">
+                <div class="disconnected-content">
+                    <h2>🔌 Déconnecté</h2>
+                    <p>Connexion perdue avec le serveur.</p>
+                    <button id="reconnectBtn" class="reconnect-btn">Reconnecter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="student.js"></script>
+</body>
+</html>

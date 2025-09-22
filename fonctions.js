@@ -5,6 +5,11 @@ save.diapo = 0;
 var data = [];
 var currentCorrectAnswer = null;
 
+// Variables pour le mode multi-joueurs
+var socket = null;
+var multiplayerMode = false;
+var serverUrl = 'http://localhost:3000';
+
 init();
 
 function init(){
@@ -296,3 +301,262 @@ document.body.addEventListener('keyup',  function(event){
 		showCorrectAnswer();
 	}
 });
+
+// Fonctions pour le mode multi-joueurs
+function toggleMultiplayer() {
+	const panel = document.getElementById('multiplayer-panel');
+	const button = document.getElementById('toggle-multiplayer');
+	
+	if (panel.style.display === 'none') {
+		panel.style.display = 'block';
+		button.textContent = '🎮 Mode Solo';
+		multiplayerMode = true;
+		initMultiplayer();
+	} else {
+		panel.style.display = 'none';
+		button.textContent = '🎮 Mode Multi-joueurs';
+		multiplayerMode = false;
+		disconnectMultiplayer();
+	}
+}
+
+function initMultiplayer() {
+	// Charger Socket.io depuis le CDN
+	if (!window.io) {
+		const script = document.createElement('script');
+		script.src = 'https://cdn.socket.io/4.7.2/socket.io.min.js';
+		script.onload = () => {
+			connectToServer();
+		};
+		document.head.appendChild(script);
+	} else {
+		connectToServer();
+	}
+}
+
+function connectToServer() {
+	socket = io(serverUrl);
+	
+	socket.on('connect', () => {
+		console.log('Connecté au serveur multi-joueurs');
+		loadQRCode();
+	});
+
+	socket.on('disconnect', () => {
+		console.log('Déconnecté du serveur multi-joueurs');
+	});
+
+	socket.on('gameState', (state) => {
+		updatePlayersList(state.players);
+		updateBuzzerDisplay(state.lastBuzzer);
+	});
+
+	socket.on('buzzerPressed', (buzzerData) => {
+		showBuzzerResult(buzzerData);
+	});
+
+	socket.on('buzzerReset', () => {
+		clearBuzzerDisplay();
+	});
+}
+
+function disconnectMultiplayer() {
+	if (socket) {
+		socket.disconnect();
+		socket = null;
+	}
+}
+
+function loadQRCode() {
+	fetch(`${serverUrl}/qr`)
+		.then(response => response.json())
+		.then(data => {
+			document.getElementById('qr-code').src = data.qrCode;
+		})
+		.catch(error => {
+			console.error('Erreur chargement QR code:', error);
+		});
+}
+
+function updatePlayersList(players) {
+	const mayoList = document.getElementById('mayo-players');
+	const ketchupList = document.getElementById('ketchup-players');
+	
+	// Vider les listes
+	mayoList.innerHTML = '';
+	ketchupList.innerHTML = '';
+	
+	// Ajouter les joueurs Mayo
+	players.mayo.forEach(player => {
+		const li = document.createElement('li');
+		li.textContent = player.name;
+		mayoList.appendChild(li);
+	});
+	
+	// Ajouter les joueurs Ketchup
+	players.ketchup.forEach(player => {
+		const li = document.createElement('li');
+		li.textContent = player.name;
+		ketchupList.appendChild(li);
+	});
+}
+
+function activateBuzzer() {
+	if (socket) {
+		socket.emit('toggleBuzzer', { active: true });
+		const activateBtn = document.getElementById('activate-buzzer');
+		activateBtn.textContent = 'Buzzer Actif';
+		activateBtn.disabled = true;
+		activateBtn.style.background = 'linear-gradient(135deg, #ff6b35, #f7931e)';
+		activateBtn.style.color = 'white';
+		document.getElementById('reset-buzzer').disabled = false;
+	}
+}
+
+function resetBuzzer() {
+	if (socket) {
+		socket.emit('resetBuzzer');
+		const activateBtn = document.getElementById('activate-buzzer');
+		activateBtn.textContent = 'Activer Buzzer';
+		activateBtn.disabled = false;
+		activateBtn.style.background = 'linear-gradient(135deg, #ff6b35, #f7931e)';
+		activateBtn.style.color = 'white';
+		document.getElementById('reset-buzzer').disabled = true;
+		clearBuzzerDisplay();
+	}
+}
+
+function showBuzzerResult(buzzerData) {
+	const display = document.getElementById('last-buzz-display');
+	const activateBtn = document.getElementById('activate-buzzer');
+	
+	display.innerHTML = `🎉 ${buzzerData.player} (${buzzerData.team.toUpperCase()}) a buzzé !`;
+	display.classList.add('buzz-active');
+	
+	// Changer la couleur du bouton selon l'équipe
+	if (buzzerData.team === 'mayo') {
+		activateBtn.style.background = 'linear-gradient(135deg, #ffd700, #ffed4e)';
+		activateBtn.style.color = '#333';
+		activateBtn.textContent = '🍯 MAYO a buzzé !';
+	} else if (buzzerData.team === 'ketchup') {
+		activateBtn.style.background = 'linear-gradient(135deg, #ff4444, #ff6666)';
+		activateBtn.style.color = 'white';
+		activateBtn.textContent = '🍅 KETCHUP a buzzé !';
+	}
+}
+
+function clearBuzzerDisplay() {
+	const display = document.getElementById('last-buzz-display');
+	const activateBtn = document.getElementById('activate-buzzer');
+	
+	display.innerHTML = '';
+	display.classList.remove('buzz-active');
+	
+	// Remettre le bouton à son état normal
+	activateBtn.style.background = 'linear-gradient(135deg, #ff6b35, #f7931e)';
+	activateBtn.style.color = 'white';
+	activateBtn.textContent = 'Activer Buzzer';
+}
+
+// Modifier les fonctions existantes pour synchroniser avec le serveur
+function addmayo(){
+	if(save.mayo < 25){
+		save.mayo++;
+		if(save.mayo < 10){
+			txtmayo = "0" + save.mayo;
+		} else {
+			txtmayo = save.mayo;
+		}
+		document.getElementById("score-mayo").src = "img/score-" + txtmayo + ".jpg";
+		document.getElementById("txt-mayo").innerHTML = txtmayo;
+		savevars();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('updateScore', { team: 'mayo', change: 1 });
+		}
+	}
+}
+
+function submayo(){
+	if(save.mayo > 0){
+		save.mayo--;
+		if(save.mayo < 10){
+			txtmayo = "0" + save.mayo;
+		} else {
+			txtmayo = save.mayo;
+		}
+		document.getElementById("score-mayo").src = "img/score-" + txtmayo + ".jpg";
+		document.getElementById("txt-mayo").innerHTML = txtmayo;
+		savevars();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('updateScore', { team: 'mayo', change: -1 });
+		}
+	}
+}
+
+function addketchup(){
+	if(save.ketchup < 25){
+		save.ketchup++;
+		if(save.ketchup < 10){
+			txtketchup = "0" + save.ketchup;
+		} else {
+			txtketchup = save.ketchup;
+		}
+		document.getElementById("score-ketchup").src = "img/score-" + txtketchup + ".jpg";
+		document.getElementById("txt-ketchup").innerHTML = txtketchup;
+		savevars();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('updateScore', { team: 'ketchup', change: 1 });
+		}
+	}
+}
+
+function subketchup(){
+	if(save.ketchup > 0){
+		save.ketchup--;
+		if(save.ketchup < 10){
+			txtketchup = "0" + save.ketchup;
+		} else {
+			txtketchup = save.ketchup;
+		}
+		document.getElementById("score-ketchup").src = "img/score-" + txtketchup + ".jpg";
+		document.getElementById("txt-ketchup").innerHTML = txtketchup;
+		savevars();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('updateScore', { team: 'ketchup', change: -1 });
+		}
+	}
+}
+
+function nextdiapo(){
+	if(save.diapo < data.length-1){
+		save.diapo++;
+		savevars();
+		diapo();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('changeSlide', { slide: save.diapo });
+		}
+	}
+}
+
+function prevdiapo(){
+	if(save.diapo > 0){
+		save.diapo--;
+		savevars();
+		diapo();
+		
+		// Synchroniser avec le serveur
+		if (socket && multiplayerMode) {
+			socket.emit('changeSlide', { slide: save.diapo });
+		}
+	}
+}
