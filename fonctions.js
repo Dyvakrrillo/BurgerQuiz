@@ -115,6 +115,7 @@ function diapo(){
 	document.getElementById("reponseB").className = "";
 	document.getElementById("reponseC").className = "";
 	document.getElementById("reponseD").className = "";
+	document.getElementById("reponse").className = "";
 	if(data[i][0] == "V"){
 		document.getElementById("generique").src = "videos/" + data[i][1] + ".mp4";
 		document.getElementById("video-frame").style.display = "block";
@@ -136,9 +137,13 @@ function diapo(){
 		}
 	} else if(data[i][0] == "S"){
 		document.getElementById("title").innerHTML = "SEL OU POIVRE";
-		document.getElementById("question").innerHTML = data[i][1];
-		document.getElementById("reponse").innerHTML = data[i][2];
-		document.getElementById("reponse").style.display = "block";
+		document.getElementById("question").innerHTML = data[i][1] + "<br/><br/>" + data[i][2]; // Titre + Question
+		document.getElementById("reponse").innerHTML = data[i][3]; // Réponse
+		document.getElementById("reponse").style.display = "none"; // Cacher la réponse initialement
+		document.getElementById("answer-controls").style.display = "block";
+		
+		// Pour Sel ou Poivre, la réponse correcte est dans l'élément 3
+		currentCorrectAnswer = data[i][3];
 	} else if(data[i][0] == "I"){
 		document.getElementById("title").innerHTML = data[i][1];
 		document.getElementById("question").innerHTML = data[i][2];
@@ -243,31 +248,40 @@ function gohelp(){
 
 function showCorrectAnswer(){
 	if(currentCorrectAnswer){
-		// Réinitialiser tous les styles
-		document.getElementById("reponseA").className = "";
-		document.getElementById("reponseB").className = "";
-		document.getElementById("reponseC").className = "";
-		document.getElementById("reponseD").className = "";
+		// Vérifier le type de question actuelle
+		var currentType = data[save.diapo][0];
 		
-		// Appliquer le style à la bonne réponse
-		var correctElement = null;
-		switch(currentCorrectAnswer.toUpperCase()){
-			case 'A':
-				correctElement = document.getElementById("reponseA");
-				break;
-			case 'B':
-				correctElement = document.getElementById("reponseB");
-				break;
-			case 'C':
-				correctElement = document.getElementById("reponseC");
-				break;
-			case 'D':
-				correctElement = document.getElementById("reponseD");
-				break;
-		}
-		
-		if(correctElement){
-			correctElement.className = "correct-answer";
+		if(currentType == "N"){
+			// Pour les Nuggets, réinitialiser tous les styles
+			document.getElementById("reponseA").className = "";
+			document.getElementById("reponseB").className = "";
+			document.getElementById("reponseC").className = "";
+			document.getElementById("reponseD").className = "";
+			
+			// Appliquer le style à la bonne réponse
+			var correctElement = null;
+			switch(currentCorrectAnswer.toUpperCase()){
+				case 'A':
+					correctElement = document.getElementById("reponseA");
+					break;
+				case 'B':
+					correctElement = document.getElementById("reponseB");
+					break;
+				case 'C':
+					correctElement = document.getElementById("reponseC");
+					break;
+				case 'D':
+					correctElement = document.getElementById("reponseD");
+					break;
+			}
+			
+			if(correctElement){
+				correctElement.className = "correct-answer";
+			}
+		} else if(currentType == "S"){
+			// Pour Sel ou Poivre, afficher la réponse et la mettre en surbrillance
+			document.getElementById("reponse").style.display = "block";
+			document.getElementById("reponse").className = "correct-answer";
 		}
 	}
 }

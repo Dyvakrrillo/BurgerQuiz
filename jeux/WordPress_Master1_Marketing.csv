@@ -8,3 +8,30 @@ N;Quel est le principal avantage de WordPress pour le marketing ?;Il est gratuit
 N;Combien coûte WordPress.org (la version open source) ?;10€ par mois;500€ par an;C'est gratuit;Ça dépend de l'hébergeur;C
 N;Quel est le nom de la base de données utilisée par défaut dans WordPress ?;MySQL;PostgreSQL;MongoDB;SQLite;A
 N;Que signifie "SEO" dans le contexte WordPress ?;Site Élégant et Original;Search Engine Optimization;Système d'Édition Optimisé;Super Éditeur d'Organisation;B
+V;sel-ou-poivre
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui promet que c'est facile à monter mais au final tu galères pendant des heures ?;Les deux
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui existe depuis 2003 ?;WordPress
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui a l'air parfait dans les démos mais chez toi c'est une autre histoire ?;Les deux
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui peut transformer votre salon en champ de bataille un samedi après-midi ?;IKEA
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui propose un service client ?;IKEA
+S;« WordPress », « IKEA » ou « Les deux » ?;Qui représente +40% du marché mondial dans sa niche ?;WordPress
+V;menus
+L;Menu 1 : Plugin Facile;Menu 2 : Thème Moyen;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures
+M;Menu 1 : Plugin Facile;Quel plugin utiliser pour créer un formulaire de contact ?
+M;Menu 1 : Plugin Facile;Vrai ou Faux : Yoast SEO est un plugin gratuit ?
+M;Menu 1 : Plugin Facile;Quel plugin permet de créer une boutique en ligne ?
+M;Menu 1 : Plugin Facile;Combien coûte généralement un plugin WordPress premium ?
+M;Menu 1 : Plugin Facile;Quel plugin est indispensable pour la sécurité d'un site WordPress ?
+M;Menu 1 : Plugin Facile;Vrai ou Faux : Tous les plugins sont compatibles entre eux ?
+M;Menu 2 : Thème Moyen;Qu'est-ce qu'un thème WordPress ?
+M;Menu 2 : Thème Moyen;Vrai ou Faux : On peut changer de thème sans perdre le contenu ?
+M;Menu 2 : Thème Moyen;Combien coûte généralement un thème WordPress premium ?
+M;Menu 2 : Thème Moyen;Vrai ou Faux : Tous les thèmes sont compatibles avec tous les plugins ?
+M;Menu 2 : Thème Moyen;Où trouve-t-on des thèmes WordPress gratuits ?
+M;Menu 2 : Thème Moyen;Vrai ou Faux : Un thème peut changer l'apparence complète d'un site ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Comment résoudre une erreur de mémoire PHP dans WordPress ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Quelle est la différence entre wp_query et get_posts() ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Comment optimiser les requêtes de base de données ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Vrai ou Faux : Les hooks WordPress sont des fonctions PHP ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Comment créer un custom post type sans plugin ?
+M;Menu 3 : Développeur qui débugge un dimanche soir à 3h du matin avec un café froid et une erreur 500 qui refuse de partir depuis 4 heures;Qu'est-ce que le hook 'init' et quand se déclenche-t-il ?
