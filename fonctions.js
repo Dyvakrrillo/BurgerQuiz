@@ -164,8 +164,14 @@ function diapo(){
 		// Pour L'Addition, la réponse correcte est dans l'élément 3
 		currentCorrectAnswer = data[i][3];
 	} else if(data[i][0] == "B"){
-		document.getElementById("title").innerHTML = "BURGER DE LA MORT";
-		document.getElementById("question").innerHTML = data[i][1];
+		document.getElementById("title").innerHTML = "BURGER DE LA MORT MARKETING";
+		document.getElementById("question").innerHTML = data[i][1]; // Question avec suggestion intégrée
+		document.getElementById("reponse").innerHTML = data[i][2]; // Réponse
+		document.getElementById("reponse").style.display = "none"; // Cacher la réponse initialement
+		document.getElementById("answer-controls").style.display = "block";
+		
+		// Pour Burger de la Mort, la réponse correcte est dans l'élément 2
+		currentCorrectAnswer = data[i][2];
 	} else if(data[i][0] == "L"){
 		document.getElementById("title").innerHTML = "MENUS";
 		document.getElementById("question").innerHTML = "Les menus :";
@@ -288,6 +294,10 @@ function showCorrectAnswer(){
 			document.getElementById("reponse").className = "correct-answer";
 		} else if(currentType == "A"){
 			// Pour L'Addition, afficher la réponse et la mettre en surbrillance
+			document.getElementById("reponse").style.display = "block";
+			document.getElementById("reponse").className = "correct-answer";
+		} else if(currentType == "B"){
+			// Pour Burger de la Mort, afficher la réponse et la mettre en surbrillance
 			document.getElementById("reponse").style.display = "block";
 			document.getElementById("reponse").className = "correct-answer";
 		}
