@@ -15,7 +15,7 @@ const io = socketIo(server, {
 });
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.RAILWAY_STATIC_URL || `http://localhost:${PORT}`;
+const HOST = process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : `http://localhost:${PORT}`;
 
 // Middleware
 app.use(cors());
@@ -41,9 +41,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'student.html'));
 });
 
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    port: PORT,
+    host: HOST
+  });
+});
+
 app.get('/qr', async (req, res) => {
   try {
-    const url = HOST;
+    const url = req.protocol + '://' + req.get('host');
     const qrCode = await QRCode.toDataURL(url);
     res.json({ qrCode, url });
   } catch (error) {
@@ -158,4 +167,5 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(`🍔 Serveur Burger Quiz démarré sur le port ${PORT}`);
   console.log(`📱 Interface étudiante: ${HOST}`);
   console.log(`🌐 URL publique: ${HOST}`);
+  console.log(`🔧 Railway Public Domain: ${process.env.RAILWAY_PUBLIC_DOMAIN || 'Non défini'}`);
 });
