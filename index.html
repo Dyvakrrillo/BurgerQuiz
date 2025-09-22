@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Burger Quiz</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Burger Quiz">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" type="text/css" href="style.css" />
+<meta charset="UTF-8" />
+</head>
+<body>
+<div id="screen">
+<div id="scores">
+	<img id="logo" src="img/logo.png" />
+	<div id="mayo">
+		<img id="img-mayo" src="img/mayo.png" />
+		<div style="position:relative;width:240px;margin:0 30px;"><div id="txt-mayo">00</div>
+		<img id="score-mayo" src="img/score-00.jpg" /></div>
+	</div>
+	<div class="spacing"></div>
+	<div id="ketchup">
+		<img id="img-ketchup" src="img/ketchup.png" />
+		<div style="position:relative;width:240px;margin:0 30px;"><div id="txt-ketchup">00</div>
+		<img id="score-ketchup" src="img/score-00.jpg" /></div>
+	</div>
+	<div id="commandes">R:Reset / F:Fichier / P:Play / H:Help<br />Mayo M:+1 L:-1 / Ketchup K:+1 J:-1<br />&larr;:Précédent / &rarr;:Suivant / Espace:Réponse</div>
+	<div id="upload">
+		<input type="file" id="fileInput" />
+	</div>
+</div>
+<div id="board">
+	<div id="video-frame">
+		<div id="video"><video id="generique" src="videos/nuggets.mp4" autoplay="true"></div>
+	</div>
+	<div id="info">
+		<div id="title">Titre</div>
+		<div id="question">Question ?</div>
+		<ul id="menus">
+		</ul>
+		<div id="image"><img id="img" src="" /></div>
+		<div id="reponse"></div>
+		<div id="reponses">
+			<span style="font-family:'BQ';">A</span> <span id="reponseA"></span><br />
+			<span style="font-family:'BQ';">B</span> <span id="reponseB"></span><br />
+			<span style="font-family:'BQ';">C</span> <span id="reponseC"></span><br />
+			<span style="font-family:'BQ';">D</span> <span id="reponseD"></span>
+		</div>
+		<div id="answer-controls" style="text-align:center;margin:20px 0;">
+			<button id="show-answer" onclick="showCorrectAnswer()">Révéler la réponse</button>
+		</div>
+	</div>
+</div>	
+</div>
+<script src="fonctions.js"></script>
+</body>
+</html>

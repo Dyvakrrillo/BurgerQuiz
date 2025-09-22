@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		body{
+			font-family:sans-serif;
+			font-size:14pt;
+		}
+		code{
+			display:inline-block;
+			border:solid 1px #BBB;
+			background:#EEE;
+			padding:2px 5px;
+			border-radius:5px;
+			margin:2px 0;
+		}
+	</style>
+	<title>Aide | Burger Quiz</title>
+  </head>
+  <body>
+	  <h1>Aide | Burger Quiz App</h1>
+	  <h2>Accès à l'application</h2>
+	  <p>Sur le web, en se rendant à cette adresse : <a href='https://www.desmaths.fr/jeux/burgerquiz/'>https://www.desmaths.fr/jeux/burgerquiz/</a>.</p>
+	  <p>En local, en téléchargeant les sources en suivant ce lien : <a href='https://www.dropbox.com/sh/o2ncp4efquq22x9/AAAQXyTN_Jlufv9u5i4Qfl2-a?dl=0'>dossier des sources sur Dropbox</a>.</p>
+	  <p>Cela évite le temps de latence pour le chargement des vidéos étant donné qu’elles sont enregistrées sur l’ordinateur.</p>
+	  <p>L’application permet d’importer les questions depuis des fichiers .csv (que l’on peut préparer dans un tableur). Trois exemples sont inclus dans le dossier « exemples » sur Dropbox (avec les réponses associées dans le pdf).</p>
+	  <p>En utilisant un navigateur récent, les questions importées et la progression dans le jeu (points obtenus et question en cours) sont enregistrés en local. Il n’y a pas de perte même après une actualisation de la page.</p>
+	  <h2>Commandes dans l’application</h2>
+	  <ul>
+		<li><code>F</code> : Permet d’ouvrir un nouveau fichier contenant les questions</li>
+	    <li><code>R</code> : Permet de réinitialiser la partie (points obtenus par les deux équipes et question en cours)</li>
+	    <li><code>P</code> : Permet de rejouer la vidéo en cours (quand une vidéo est affichée à l’écran)</li>
+	    <li><code>M</code> : Ajoute un point à l’équipe Mayo</li>
+	    <li><code>K</code> : Ajoute un point à l’équipe Ketchup</li>
+	    <li><code>L</code> : Retire un point à l’équipe Mayo</li>
+	    <li><code>J</code> : Retire un point à l’équipe Ketchup</li>
+	    <li><code>Flèche droite</code> : Permet d’aller sur la diapo suivante</li>
+	    <li><code>Flèche gauche</code> : Permet de revenir à la diapo précédente</li>
+	  </ul>
+	  <h2>Création d'un pack de questions personnalisé</h2>
+	  <p>Vous pouvez créer votre propre fichier de questions en respectant le modèle cidessous (ne pas hésiter à regarder les exemple).</p>
+	  <p>La première colonne indique le type de diapositive et les suivantes les différents paramètres que l’on peut lui associer :</p>
+	  <ul>
+		<li>V pour afficher une vidéo parmi « generique », « nuggets », « sel-ou-poivre », « menus », « addition », « burger-mort ».<br />Par exemple :
+	  <code>V;nuggets</code></li>
+	  	<li>I pour afficher une image (présente sur le web).<br />Par exemple : <code>I;Titre;Sous-titre affiché;http://url.de/l-image.png</code></li>
+	  	<li>N pour afficher une question Nuggets.<br />Par exemple : <code>N;Question posée;Réponse A;Réponse B;Réponse C;Réponse D</code></li>
+	  	<li>S pour afficher une question Sel ou Poivre.<br />Par exemple : <code>S;Thème du Sel ou Poivre;Question posée</code></li>
+	  	<li>L pour afficher la liste des Menus.<br />Par exemple : <code>L;Menu 1 : Nom du menu 1;Menu 2 : Nom du menu 2;Menu 3 : Nom du menu 3</code></li>
+	  	<li>M pour afficher une question Menu.<br />Par exemple : <code>M;Menu 1 : Nom du menu 1;Question posée</code></li>
+		<li>A pour afficher une question Addition.<br />Par exemple : <code>A;Thème de l'addition;Question posée</code></li>
+	    <li>B pour afficher une question Burger de la Mort.<br />Par exemple : <code>B;Question posée</code></li>
+	  </ul>
+	  <p>Il est possible d’insérer du code HTML dans les questions tant qu’il n’y a pas de guillemets, de points-virgules ou de retours à la ligne utilisés. Pour mettre du texte entre guillemets, utilisez ceux-ci : <code>« »</code>.</p>
+	  
+	  <p>Par exemple, ceci est accepté : <code>&lt;strong&gt;Phrase 1&lt;/strong&gt;&lt;br /&gt;« Phrase 2 »&lt;br /&gt;&lt;img src='URL-image' /&gt;</code></p>
+	  <p>Si une question ne fonctionne pas, il faut vérifier que le format généré à l’exportation correspond aux modèles précédents (vérifier entre autres qu’il n’y a ni retour à la ligne ni point-virgule ni guillemets  »  » au sein d’une question).</p>
+  </body>
+</html>
