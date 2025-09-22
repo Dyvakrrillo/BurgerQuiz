@@ -15,6 +15,10 @@ const io = socketIo(server, {
 });
 
 const PORT = process.env.PORT || 3000;
+console.log('🔧 Configuration Railway:');
+console.log('PORT:', PORT);
+console.log('RAILWAY_PUBLIC_DOMAIN:', process.env.RAILWAY_PUBLIC_DOMAIN);
+console.log('RAILWAY_STATIC_URL:', process.env.RAILWAY_STATIC_URL);
 const HOST = process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : `http://localhost:${PORT}`;
 
 // Middleware
