@@ -8,7 +8,7 @@ var currentCorrectAnswer = null;
 // Variables pour le mode multi-joueurs
 var socket = null;
 var multiplayerMode = false;
-var serverUrl = 'http://localhost:3000';
+var serverUrl = 'https://burgerquiz-production.up.railway.app';
 
 init();
 
