@@ -156,9 +156,13 @@ function diapo(){
 		document.getElementById("reponse").style.display = "block";
 	} else if(data[i][0] == "A"){
 		document.getElementById("title").innerHTML = "ADDITION";
-		document.getElementById("question").innerHTML = data[i][1];
-		document.getElementById("reponse").innerHTML = data[i][2];
-		document.getElementById("reponse").style.display = "block";
+		document.getElementById("question").innerHTML = data[i][1] + "<br/><br/>" + data[i][2]; // Titre + Question
+		document.getElementById("reponse").innerHTML = data[i][3]; // Réponse
+		document.getElementById("reponse").style.display = "none"; // Cacher la réponse initialement
+		document.getElementById("answer-controls").style.display = "block";
+		
+		// Pour L'Addition, la réponse correcte est dans l'élément 3
+		currentCorrectAnswer = data[i][3];
 	} else if(data[i][0] == "B"){
 		document.getElementById("title").innerHTML = "BURGER DE LA MORT";
 		document.getElementById("question").innerHTML = data[i][1];
@@ -280,6 +284,10 @@ function showCorrectAnswer(){
 			}
 		} else if(currentType == "S"){
 			// Pour Sel ou Poivre, afficher la réponse et la mettre en surbrillance
+			document.getElementById("reponse").style.display = "block";
+			document.getElementById("reponse").className = "correct-answer";
+		} else if(currentType == "A"){
+			// Pour L'Addition, afficher la réponse et la mettre en surbrillance
 			document.getElementById("reponse").style.display = "block";
 			document.getElementById("reponse").className = "correct-answer";
 		}
